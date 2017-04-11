@@ -8,10 +8,11 @@ import android.view.WindowManager;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCGLSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected GLSurfaceView glSurfaceView;
+    protected CCGLSurfaceView glSurfaceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        glSurfaceView = new GLSurfaceView(this);
+        glSurfaceView = new CCGLSurfaceView(this);
         setContentView(glSurfaceView);
 
         CCDirector ccDirector = CCDirector.sharedDirector();
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         ccDirector.setAnimationInterval(1.0f/60.0f);
         ccDirector.setDisplayFPS(true);
 
-//        CCScene ccScene = Sli
+        CCScene scene = GameLayer.scene();
+        ccDirector.runWithScene(scene);
     }
 
     @Override
